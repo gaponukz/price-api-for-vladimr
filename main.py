@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 import time, random
 
 class TemplateBot(object):
-    def __init__(self, show = False, debug = False) -> None:
+    def __init__(self, show = False, debug = False):
         options = Options()
         if not show: options.add_argument("--headless")
         options.add_argument('--disable-dev-shm-usage')
@@ -15,7 +15,7 @@ class TemplateBot(object):
         self.driver = webdriver.Chrome(options = options)
         self.debug = debug
 
-    def protected_sleep(self, time_to_sleep = None) -> None:
+    def protected_sleep(self, time_to_sleep = None):
         if not time_to_sleep:
             list_of_seconds = [x / 10 for x in range(1,11)]
             time.sleep(random.choice(list_of_seconds))
@@ -40,7 +40,7 @@ class TemplateBot(object):
 
 
 class ParserBot(TemplateBot):
-    def parse(self, url: str) -> float:
+    def parse(self, url):
         self.driver.get(url)
         self.protected_sleep(1.5)
 
@@ -55,5 +55,9 @@ class ParserBot(TemplateBot):
 
 
 @app.get("/")
-def read_root():
+def home():
+    app = FastAPI()
+    parser = ParserBot(show = False)
+    price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
+
     return {"price": "0"}
