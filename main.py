@@ -53,11 +53,10 @@ class ParserBot(TemplateBot):
                 }).text
             )
 
+parser = ParserBot(show = False)
+price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
+app = FastAPI()
 
 @app.get("/")
 def home():
-    app = FastAPI()
-    parser = ParserBot(show = False)
-    price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
-
     return {"price": "0"}
