@@ -53,11 +53,11 @@ class ParserBot(TemplateBot):
                 }).text
             )
 
-if __name__ == "__main__":
-    app = FastAPI()
-    parser = ParserBot(show = False)
-    price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
 
-    @app.get("/")
-    def read_root():
-        return {"price": price.__next__()}
+app = FastAPI()
+parser = ParserBot(show = False)
+price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
+
+@app.get("/")
+def read_root():
+    return {"price": price.__next__()}
