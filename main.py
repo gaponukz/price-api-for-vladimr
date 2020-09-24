@@ -54,10 +54,6 @@ class ParserBot(TemplateBot):
             )
 
 
-app = FastAPI()
-parser = ParserBot(show = False)
-price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
-
 @app.get("/")
 def read_root():
     return {"price": "0"}
