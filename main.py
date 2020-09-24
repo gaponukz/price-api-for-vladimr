@@ -7,12 +7,7 @@ import time, random, os
 class TemplateBot(object):
     def __init__(self, show = False, debug = False):
         options = Options()
-        if not show: options.add_argument("--headless")
-        options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument('--disable-logging') 
+        options.add_argument("--headless")
         self.driver = webdriver.Chrome(options = options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
         self.debug = debug
 
@@ -54,8 +49,10 @@ class ParserBot(TemplateBot):
                 }).text
             )
 
+parser = ParserBot(show = False)
+price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
 app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"price": os.environ.get("CHROMEDRIVER_PATH")}
+    return {"price": "0"}
