@@ -8,7 +8,7 @@ class TemplateBot(object):
     def __init__(self, show = False, debug = False):
         options = Options()
         options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options = options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+        self.driver = webdriver.Chrome(options = options, executable_path='/app/.apt/usr/bin/google-chrome')
         self.debug = debug
 
     def protected_sleep(self, time_to_sleep = None):
