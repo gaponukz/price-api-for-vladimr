@@ -49,9 +49,14 @@ class ParserBot(TemplateBot):
                 }).text
             )
 
-parser = ParserBot(show = False)
-price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
 app = FastAPI()
+options = Options()
+options.add_argument("--headless")
+driver = webdriver.Chrome(options = options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+
+@app.get("/")
+def home():
+    return {"price": "0"}
 
 @app.get("/")
 def home():
