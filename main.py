@@ -54,6 +54,7 @@ class ParserBot(TemplateBot):
             )
 
 app = FastAPI()
+parser = ParserBot(show = False)
 
 @app.get("/")
 def home():
