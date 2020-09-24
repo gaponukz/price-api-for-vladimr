@@ -2,17 +2,18 @@ from bs4 import BeautifulSoup
 from fastapi import FastAPI
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import time, random
+import time, random, os
 
 class TemplateBot(object):
     def __init__(self, show = False, debug = False):
         options = Options()
         if not show: options.add_argument("--headless")
+        options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--no-sandbox')
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--disable-logging') 
-        self.driver = webdriver.Chrome(options = options, executable_path = '/app/.apt/usr/bin/google_chrome')
+        self.driver = webdriver.Chrome(options = options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
         self.debug = debug
 
     def protected_sleep(self, time_to_sleep = None):
@@ -53,8 +54,9 @@ class ParserBot(TemplateBot):
                 }).text
             )
 
-app = FastAPI()
 parser = ParserBot(show = False)
+price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
+app = FastAPI()
 
 @app.get("/")
 def home():
