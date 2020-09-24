@@ -53,8 +53,6 @@ class ParserBot(TemplateBot):
                 }).text
             )
 
-parser = ParserBot(show = False)
-price = parser.parse('https://ru.tradingview.com/symbols/EURUSD/')
 app = FastAPI()
 
 @app.get("/")
