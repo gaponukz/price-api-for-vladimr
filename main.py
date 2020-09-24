@@ -12,7 +12,7 @@ class TemplateBot(object):
         options.add_argument('--no-sandbox')
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--disable-logging') 
-        self.driver = webdriver.Chrome(options = options, executable_path = 'chromedriver')
+        self.driver = webdriver.Chrome(options = options, executable_path = '/app/.apt/usr/bin/google_chrome')
         self.debug = debug
 
     def protected_sleep(self, time_to_sleep = None):
