@@ -50,12 +50,8 @@ class ParserBot(TemplateBot):
             )
 
 app = FastAPI()
-options = Options()
-options.add_argument("--headless")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(options = options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
 
 @app.get("/")
 def home():
+    print("lllllllllllllllllllllllllllllllllll")
     return {"price": "0"}
